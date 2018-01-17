@@ -1,19 +1,68 @@
+<?php
+
+use Phalcon\Forms\Form;
+use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\Select;
+use Phalcon\Forms\Element\Password;
+use Phalcon\Forms\Element\PresenceOf;
+
+$form = new Form();
+
+$form->add(
+    new Text(
+        "First Name"
+    )
+);
+
+$form->add(
+    new Text(
+        "Last Name"
+    )
+);
+
+$form->add(
+    new Text(
+        "Username"
+    )
+);
+
+$password = new Password('password', [
+            'class' => 'form-control input-md',
+            'placeholder' => 'Password'
+        ]);
+$password
+            ->setLabel('Your password:')
+            ->addValidators([
+                new PresenceOf([
+                    'message' => 'The password is required to authorize the change.',
+                    'cancelOnFail' => TRUE
+                ]),
+                new PasswordValidator([
+                    'message' => 'The password you input is incorrect.'
+                ]),
+            ])
+            ->setUserOption('type', 'input');
+
+
+$form->add($password);
+
+?>
+
+
+
+
 <h2>Sign up using this form</h2>
 
-<?php echo $this->tag->form("signup/register"); ?>
-
-    <p>
-        <label for="name">Name</label>
-        <?php echo $this->tag->textField("name"); ?>
-    </p>
-
-    <p>
-        <label for="email">E-Mail</label>
-        <?php echo $this->tag->textField("email"); ?>
-    </p>
-
-    <p>
-        <?php echo $this->tag->submitButton("Register"); ?>
-    </p>
-
-</form>
+<section class="main-container">
+    <div class="main-wrapper">
+        <h2>Signup</h2>
+        <form class="signup-form" action="" method="POST">
+            <input type="text" name="first" placeholder="First name">
+            <input type="text" name="last" placeholder="Last name">
+            <input type="text" name="email" placeholder="E-mail">
+            <input type="text" name="uid" placeholder="Username">
+            <input type="password" name="pwd" placeholder="password">
+            <button type="submit" name="submit" value="set">Sign Up</button>
+        </form>
+    </div>
+</section>
