@@ -1,0 +1,16 @@
+[17-Jan-2018 11:31:12 UTC] PHP Fatal error:  Class 'PasswordValidator' not found in /home/ubuntu/workspace/deagle/app/views/signup/index.phtml on line 40
+[17-Jan-2018 11:31:12 UTC] PHP Stack trace:
+[17-Jan-2018 11:31:12 UTC] PHP   1. {main}() /home/ubuntu/workspace/deagle/public/index.php:0
+[17-Jan-2018 11:31:12 UTC] PHP   2. Phalcon\Mvc\Application->handle() /home/ubuntu/workspace/deagle/public/index.php:55
+[17-Jan-2018 11:31:12 UTC] PHP   3. Phalcon\Mvc\View->render() /home/ubuntu/workspace/deagle/public/index.php:55
+[17-Jan-2018 11:31:12 UTC] PHP   4. Phalcon\Mvc\View->_engineRender() /home/ubuntu/workspace/deagle/public/index.php:55
+[17-Jan-2018 11:31:12 UTC] PHP   5. Phalcon\Mvc\View\Engine\Php->render() /home/ubuntu/workspace/deagle/public/index.php:55
+[17-Jan-2018 11:31:12 UTC] PHP   6. Phalcon\Mvc\View\Engine\Php->render() /home/ubuntu/workspace/deagle/public/index.php:55
+[17-Jan-2018 11:34:30 UTC] PHP Fatal error:  Class 'Phalcon\Validation\Validator\PasswordValidator' not found in /home/ubuntu/workspace/deagle/app/views/signup/index.phtml on line 41
+[17-Jan-2018 11:34:30 UTC] PHP Stack trace:
+[17-Jan-2018 11:34:30 UTC] PHP   1. {main}() /home/ubuntu/workspace/deagle/public/index.php:0
+[17-Jan-2018 11:34:30 UTC] PHP   2. Phalcon\Mvc\Application->handle() /home/ubuntu/workspace/deagle/public/index.php:55
+[17-Jan-2018 11:34:30 UTC] PHP   3. Phalcon\Mvc\View->render() /home/ubuntu/workspace/deagle/public/index.php:55
+[17-Jan-2018 11:34:30 UTC] PHP   4. Phalcon\Mvc\View->_engineRender() /home/ubuntu/workspace/deagle/public/index.php:55
+[17-Jan-2018 11:34:30 UTC] PHP   5. Phalcon\Mvc\View\Engine\Php->render() /home/ubuntu/workspace/deagle/public/index.php:55
+[17-Jan-2018 11:34:30 UTC] PHP   6. Phalcon\Mvc\View\Engine\Php->render() /home/ubuntu/workspace/deagle/public/index.php:55
