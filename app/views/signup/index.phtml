@@ -1,5 +1,3 @@
-<h2>Sign up using this form</h2>
-
 <section class="main-container">
     <div class="main-wrapper">
         <h2>Signup</h2>
@@ -21,6 +19,11 @@
                 <label> Password </label>
                 <?php echo $form->render('password'); ?>
             </p> 
+            <p>
+                <label> Repeat password</label>
+                <?php echo $form->render('repeatPassword'); ?>
+            </p> 
+            
             <button type="submit" name="submit" value="set">Sign Up</button>
         </form>
     </div>

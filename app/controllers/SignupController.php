@@ -23,7 +23,7 @@ class SignupController extends Controller
             $user->set_first($first_name);
             $user->set_last($last_name);
             $user->set_email($email);
-            $user->password = sha1($password);
+            $user->set_password = sha1($password);
             $user->set_username($username);
             
             $user->created_at = new Phalcon\Db\RawValue('now()');

@@ -17,6 +17,7 @@ $loader->registerDirs(
     [
         APP_PATH . '/controllers/',
         APP_PATH . '/models/',
+        APP_PATH . '/forms/'
     ]
 );
 

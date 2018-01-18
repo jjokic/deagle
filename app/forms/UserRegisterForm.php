@@ -5,7 +5,7 @@ use Phalcon\Forms\Element\Password;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Email;
 
-class RegisterForm extends Form
+class UserRegisterForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
@@ -64,6 +64,7 @@ class RegisterForm extends Form
             ])
         ]);
         $this->add($password);
+       
         // Confirm Password
         $repeatPassword = new Password('repeatPassword');
         $repeatPassword->setLabel('Repeat Password');
@@ -73,5 +74,6 @@ class RegisterForm extends Form
             ])
         ]);
         $this->add($repeatPassword);
+        
     }
 }
