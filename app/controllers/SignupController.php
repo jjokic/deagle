@@ -1,20 +1,13 @@
 <?php
 
 use Phalcon\Mvc\Controller;
-use App\Forms\UserRegister;
 
 class SignupController extends Controller
 {
 
-    public function initialize()
-    {
-        $this->tag->setTitle('Sign Up/Sign In');
-        parent::initialize();
-    }
-    
     public function indexAction()
     {
-        $form = new RegisterForm;
+        $form = new UserRegisterForm();
         if ($this->request->isPost()) {
             $first_name = $this->request->getPost('first_name', ['string', 'striptags']);
             $last_name = $this->request->getPost('last_name', ['string', 'striptags']);
@@ -54,3 +47,4 @@ class SignupController extends Controller
         $this->view->form = $form;
     }
 }
+
