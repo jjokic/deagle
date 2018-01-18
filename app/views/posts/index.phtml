@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Listing of posts</title>
+    </head>
+    <body>
+
+        <h1>Sandbox of letters</h1>
+        
+    <div class="list">
+        
+        <?php foreach($posts as $post) { ?>
+            <article>
+                <h1> <?php echo $post->get_pid(); ?> </h1>
+                <p> <?php echo $post->get_uid(); ?> </p>
+                <p> <?php echo $post->get_content(); ?> </p>
+            </article>
+        <?php } ?>
+        
+    </div>
+
+    </body>
+</html>
