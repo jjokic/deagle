@@ -35,6 +35,7 @@ class User extends Model
         return $this->username;
     }
     
+    
     // SETTERS
     
     public function set_id($uid) {
