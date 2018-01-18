@@ -35,7 +35,6 @@ class User extends Model
         return $this->username;
     }
     
-    
     // SETTERS
     
     public function set_id($uid) {
@@ -58,6 +57,9 @@ class User extends Model
         $this->password = $pwd;
     }
     
+    public function set_username($username) {
+        $this->username = $username;
+    }
     
     public function validation()
     {
