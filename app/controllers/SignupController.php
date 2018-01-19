@@ -4,11 +4,19 @@ use Phalcon\Mvc\Controller;
 
 class SignupController extends Controller
 {
-
+    
     public function indexAction()
     {
         $form = new UserRegisterForm();
+        
         if ($this->request->isPost()) {
+            $this->flash->error('OVO JE POST');
+            if (!$form->isValid($_POST)) {
+                $messages = $form->getMessages();
+                foreach ($messages as $message) {
+                echo $message, "<br>";
+    }
+}
             $first_name = $this->request->getPost('first_name', ['string', 'striptags']);
             $last_name = $this->request->getPost('last_name', ['string', 'striptags']);
             $username = $this->request->getPost('username', 'alphanum');
@@ -29,6 +37,7 @@ class SignupController extends Controller
             $user->created_at = new Phalcon\Db\RawValue('now()');
             $user->active = 'Y';
             if ($user->save() == false) {
+                $this->flash->error('nije sejvan juzer');
                 foreach ($user->getMessages() as $message) {
                     $this->flash->error((string) $message);
                 }
@@ -44,7 +53,9 @@ class SignupController extends Controller
                 );
             }
         }
+        
         $this->view->form = $form;
+        
     }
 }
 

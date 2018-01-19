@@ -10,37 +10,37 @@ class UserRegisterForm extends Form
     public function initialize($entity = null, $options = null)
     {
         // First Name
-        $name = new Text('first_name');
-        $name->setLabel('Your first name');
-        $name->setFilters(['striptags', 'string']);
-        $name->addValidators([
+        $first_name = new Text('first_name');
+        $first_name->setLabel('Your first name');
+        $first_name->setFilters(['striptags', 'string']);
+        $first_name->addValidators([
             new PresenceOf([
                 'message' => 'First name is REQUIRED'
             ])
         ]);
-        $this->add($name);
+        $this->add($first_name);
         
         // Last Name
-        $name = new Text('last_name');
-        $name->setLabel('Your last name');
-        $name->setFilters(['striptags', 'string']);
-        $name->addValidators([
+        $last_name = new Text('last_name');
+        $last_name->setLabel('Your last name');
+        $last_name->setFilters(['striptags', 'string']);
+        $last_name->addValidators([
             new PresenceOf([
                 'message' => 'Last name is REQUIRED'
             ])
         ]);
-        $this->add($name);
+        $this->add($last_name);
         
         // User Name
-        $name = new Text('username');
-        $name->setLabel('Username');
-        $name->setFilters(['alpha']);
-        $name->addValidators([
+        $username = new Text('username');
+        $username->setLabel('Username');
+        $username->setFilters(['alphanum']);
+        $username->addValidators([
             new PresenceOf([
-                'message' => 'Please enter your desired user name'
+                'message' => 'Please enter your desired username'
             ])
         ]);
-        $this->add($name);
+        $this->add($username);
         
         // Email
         $email = new Text('email');
@@ -76,4 +76,6 @@ class UserRegisterForm extends Form
         $this->add($repeatPassword);
         
     }
+    
+
 }

@@ -23,29 +23,11 @@ $loader->registerDirs(
 
 $loader->register();
 
-
 // Create a DI
 $di = new FactoryDefault();
 
-// Setup the view component
-$di->set(
-    'view',
-    function () {
-        $view = new View();
-        $view->setViewsDir(APP_PATH . '/views/');
-        return $view;
-    }
-);
-
-// Setup a base URI so that all generated URIs include the "tutorial" folder
-$di->set(
-    'url',
-    function () {
-        $url = new UrlProvider();
-        $url->setBaseUri('/');
-        return $url;
-    }
-);
+// Register services
+include APP_PATH . "/config/services.php";
 
 // ...
 
