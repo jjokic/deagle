@@ -27,6 +27,7 @@ class SignupController extends Controller
                         "action"     => "index",
                     ]
                 );
+                }
             }
                 
             $first_name = $this->request->getPost('first_name', ['string', 'striptags']);
@@ -44,7 +45,7 @@ class SignupController extends Controller
             $user->set_first($first_name);
             $user->set_last($last_name);
             $user->set_email($email);
-            $user->set_password = sha1($password);
+            $user->set_password($this->security->hash($password));
             $user->set_username($username);
             
             $user->created_at = new Phalcon\Db\RawValue('now()');
@@ -53,20 +54,13 @@ class SignupController extends Controller
                 $this->flash->error('nije sejvan juzer');
                 foreach ($user->getMessages() as $message) 
                     $this->flash->error((string) $message);
-                } 
-            } else {
-                
-                
+                } else { 
+             
                 $this->flash->success('Thanks for sign-up, please log-in to start twottering');
-                
-//                return $this->response->redirect('....');
-               
-                
+//              return $this->response->redirect('....');
             }
         }
-
     }
-
-    
-    
 }
+    
+    

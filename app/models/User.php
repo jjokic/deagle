@@ -35,6 +35,10 @@ class User extends Model
         return $this->username;
     }
     
+     public function get_password() {
+        return $this->password;
+    }
+    
     
     // SETTERS
     
@@ -43,11 +47,11 @@ class User extends Model
     }
     
     public function set_first($first) {
-        $this->first = $first;
+        $this->first_name = $first;
     }
     
     public function set_last($last) {
-        $this->last = $last;
+        $this->last_name = $last;
     }
     
     public function set_email($email) {
