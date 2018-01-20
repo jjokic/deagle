@@ -21,14 +21,17 @@ class SignupController extends Controller
                 $messages = $form->getMessages();
                 foreach ($messages as $message) {
                     $this->flash->error($message);
-                }
+                return $this->dispatcher->forward(
+                    [
+                        "controller" => "index",
+                        "action"     => "index",
+                    ]
+                );
+            }
                 
             $first_name = $this->request->getPost('first_name', ['string', 'striptags']);
-            echo "$first_name";
             $last_name = $this->request->getPost('last_name', ['string', 'striptags']);
-            echo "$last_name";
             $username = $this->request->getPost('username', 'alphanum');
-            echo "$username";
             $email = $this->request->getPost('email', 'email');
             $password = $this->request->getPost('password');
             $repeatPassword = $this->request->getPost('repeatPassword');
@@ -36,6 +39,7 @@ class SignupController extends Controller
                 $this->flash->error('Passwords are different');
                 return false;
             }
+            
             $user = new User();
             $user->set_first($first_name);
             $user->set_last($last_name);
@@ -47,26 +51,18 @@ class SignupController extends Controller
             $user->active = 'Y';
             if ($user->save() == false) {
                 $this->flash->error('nije sejvan juzer');
-                foreach ($user->getMessages() as $message) {
+                foreach ($user->getMessages() as $message) 
                     $this->flash->error((string) $message);
-                }
+                } 
             } else {
-                $this->tag->setDefault('email', '');
-                $this->tag->setDefault('password', '');
+                
+                
                 $this->flash->success('Thanks for sign-up, please log-in to start twottering');
-                /*
-                return $this->dispatcher->forward(
-                    [
-                        "controller" => "session",
-                        "action"     => "index",
-                    ]
-                );
-                */
+                
+//                return $this->response->redirect('....');
+               
+                
             }
-                    
- 
-            }
-    
         }
 
     }
