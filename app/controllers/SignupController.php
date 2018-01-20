@@ -4,22 +4,31 @@ use Phalcon\Mvc\Controller;
 
 class SignupController extends Controller
 {
+    public function initialize() {
+    $this->forms->set('register', new UserRegisterForm());   
+    }
     
-    public function indexAction()
-    {
-        $form = new UserRegisterForm();
+    public function indexAction() {
         
-        if ($this->request->isPost()) {
-            $this->flash->error('OVO JE POST');
-            if (!$form->isValid($_POST)) {
+    }
+    
+    public function submitAction() {
+    
+     $form = $this->forms->get('register');
+    
+    if ($this->request->isPost()) {
+            if (!$form->isValid($this->request->getPost())) {
                 $messages = $form->getMessages();
                 foreach ($messages as $message) {
-                echo $message, "<br>";
-    }
-}
+                    $this->flash->error($message);
+                }
+                
             $first_name = $this->request->getPost('first_name', ['string', 'striptags']);
+            echo "$first_name";
             $last_name = $this->request->getPost('last_name', ['string', 'striptags']);
+            echo "$last_name";
             $username = $this->request->getPost('username', 'alphanum');
+            echo "$username";
             $email = $this->request->getPost('email', 'email');
             $password = $this->request->getPost('password');
             $repeatPassword = $this->request->getPost('repeatPassword');
@@ -45,17 +54,23 @@ class SignupController extends Controller
                 $this->tag->setDefault('email', '');
                 $this->tag->setDefault('password', '');
                 $this->flash->success('Thanks for sign-up, please log-in to start twottering');
+                /*
                 return $this->dispatcher->forward(
                     [
                         "controller" => "session",
                         "action"     => "index",
                     ]
                 );
+                */
             }
+                    
+ 
+            }
+    
         }
-        
-        $this->view->form = $form;
-        
-    }
-}
 
+    }
+
+    
+    
+}

@@ -1,8 +1,12 @@
+<?php
+$form = $this->forms->get('register');
+?>
+
 <section class="main-container">
     <div class="main-wrapper">
         <h2>Signup</h2>
         
-        <form class="signup-form" method="post" action="/signup">
+        <form class="signup-form" method="post" action="/signup/submit">
             <p>
                 <label> First Name </label>
                 <?php echo $form->render('first_name'); ?>
