@@ -48,8 +48,6 @@ class SignupController extends Controller
             $user->set_password($this->security->hash($password));
             $user->set_username($username);
             
-            $user->created_at = new Phalcon\Db\RawValue('now()');
-            $user->active = 'Y';
             if ($user->save() == false) {
                 $this->flash->error('nije sejvan juzer');
                 foreach ($user->getMessages() as $message) 

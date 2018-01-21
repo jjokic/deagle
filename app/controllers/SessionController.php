@@ -23,11 +23,11 @@ class SessionController extends Controller
      *
      * @param Users $user
      */
-    private function _registerSession(Users $user)
+    private function _registerSession(User $user)
     {
         $this->session->set('auth', [
-            'id' => $user->id,
-            'name' => $user->name
+            'id' => $user->get_id(),
+            'name' => $user->get_first()
         ]);
     }
 
@@ -41,23 +41,27 @@ class SessionController extends Controller
 
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
-
-            $user = User::findFirst([
-                "(email = :email: OR username = :email:) AND password = :password:",
-                'bind' => ['email' => $email, 'password' => sha1($password)]
-            ]);
-            if ($user != false) {
+            
+            $user = User::findFirstByEmail($email);
+            
+            if ($user) {
+            if ($this->security->checkHash($password, $user->get_password())) {
+                // The password is valid
                 $this->_registerSession($user);
-                $this->flash->success('Welcome ' . $user->name);
-
+                $this->flash->success('Welcome ' . $user->get_first());
                 return $this->dispatcher->forward(
                     [
-                        "controller" => "invoices",
+                        "controller" => "session",
                         "action"     => "index",
                     ]
                 );
             }
+        } else {
+            // To protect against timing attacks. Regardless of whether a user exists or not, the script will take roughly the same amount as it will always be computing a hash.
+            $this->security->hash(rand());
+        }
 
+        // The validation has failed
             $this->flash->error('Wrong email/password');
         }
 
