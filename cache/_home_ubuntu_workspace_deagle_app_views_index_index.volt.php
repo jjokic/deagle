@@ -17,8 +17,6 @@
   
 
 <?php if ($this->session->get('auth') == null) { ?> 
-Nije setan session var
-
 
 <div class="row">
 
@@ -64,7 +62,21 @@ Nije setan session var
 </div>
 
 <?php } else { ?> 
-Setan je session var
+<?php 
+
+ $auth = $this->session->get('auth');
+        //Query the active user
+        $user = User::findFirst($auth['id']);
+        $msg = "Welcome " . $auth['name'];
+        $this->flash->success($msg);
+        
+        // Get all TWATS
+        $twats = Post::find();
+        echo "There are ", count($twats), "\n";
+        
+        
+        
+?>
 <?php } ?>
 
 </body>

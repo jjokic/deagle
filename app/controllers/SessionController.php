@@ -49,7 +49,7 @@ class SessionController extends Controller
                 $this->flash->success('Welcome ' . $user->get_first());
                 return $this->dispatcher->forward(
                     [
-                        "controller" => "session",
+                        "controller" => "index",
                         "action"     => "index",
                     ]
                 );

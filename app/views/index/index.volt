@@ -17,8 +17,6 @@
   
 
 {% if session.get('auth') == null %} {# variable is not set #}
-Nije setan session var
-
 
 <div class="row">
 
@@ -64,7 +62,19 @@ Nije setan session var
 </div>
 
 {% else %} {# variable is set #}
-Setan je session var
+<?php 
+
+ $auth = $this->session->get('auth');
+        //Query the active user
+        $user = User::findFirst($auth['id']);
+        $msg = "Welcome " . $auth['name'];
+        $this->flash->success($msg);
+        
+        // Get all TWATS
+        $twats = Post::find();
+        echo "There are ", count($twats), "\n";
+        
+?>
 {% endif %}
 
 </body>
