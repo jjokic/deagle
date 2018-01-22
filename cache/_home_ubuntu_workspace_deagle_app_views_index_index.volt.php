@@ -16,6 +16,10 @@
         <?= $this->tag->javascriptInclude('js/utils.js') ?>
   
 
+<?php if ($this->session->get('auth') == null) { ?> 
+Nije setan session var
+
+
 <div class="row">
 
     <div class="col-md-6">
@@ -58,6 +62,10 @@
         </div>
     </div>
 </div>
+
+<?php } else { ?> 
+Setan je session var
+<?php } ?>
 
 </body>
 </html>

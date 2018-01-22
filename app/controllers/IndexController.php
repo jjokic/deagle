@@ -6,6 +6,15 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-      #  echo '<h1>Hello!</h1>';
+      /*
+      if ($this->session->has('auth')) {
+            // Retrieve its value
+            $this->flash->success("IMA :D");
+            $name = $this->session->get('user-name');
+          
+        }
+        */
     }
+    
 }
+

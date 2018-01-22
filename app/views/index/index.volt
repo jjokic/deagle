@@ -16,6 +16,10 @@
         {{ javascript_include('js/utils.js') }}
   
 
+{% if session.get('auth') == null %} {# variable is not set #}
+Nije setan session var
+
+
 <div class="row">
 
     <div class="col-md-6">
@@ -58,6 +62,10 @@
         </div>
     </div>
 </div>
+
+{% else %} {# variable is set #}
+Setan je session var
+{% endif %}
 
 </body>
 </html>
