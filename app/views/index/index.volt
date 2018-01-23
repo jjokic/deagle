@@ -64,7 +64,9 @@
 {% else %} {# variable is set #}
 <?php 
 
- $auth = $this->session->get('auth');
+
+$form = new UserPostForm();
+$auth = $this->session->get('auth');
         //Query the active user
         $user = User::findFirst($auth['id']);
         $msg = "Welcome " . $auth['name'];
@@ -76,11 +78,16 @@
         
         foreach ($twats as $twat) 
                 echo $twat->content . "\n";
-
-?>
-
-
-
+?>       
+    {{ form("index/addPost") }}
+    <div class="main-wrapper">
+            <h4> Twatter box </h4>
+            <p>
+                <?php echo $form->render('twext'); ?>
+            </p>
+        
+        <?php echo $form->render('Post'); ?>
+   </div>          
 
 {% endif %}
 

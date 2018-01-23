@@ -64,7 +64,9 @@
 <?php } else { ?> 
 <?php 
 
- $auth = $this->session->get('auth');
+
+$form = new UserPostForm();
+$auth = $this->session->get('auth');
         //Query the active user
         $user = User::findFirst($auth['id']);
         $msg = "Welcome " . $auth['name'];
@@ -76,10 +78,17 @@
         
         foreach ($twats as $twat) 
                 echo $twat->content . "\n";
-                
-                
+?>       
+    <?= $this->tag->form(['index/addPost']) ?>
+    <div class="main-wrapper">
+            <h4> Twatter box </h4>
+            <p>
+                <?php echo $form->render('twext'); ?>
+            </p>
         
-?>
+        <?php echo $form->render('Post'); ?>
+   </div>          
+
 <?php } ?>
 
 </body>

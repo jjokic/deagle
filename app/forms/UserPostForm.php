@@ -5,11 +5,11 @@ use Phalcon\Forms\Element\Submit;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\StringLength as StringLength;
 
-class UserRegisterForm extends Form {
+class UserPostForm extends Form {
     
     public function initialize($entity = null, $options = null) {
         
-        $content = new TextArea();
+        $content = new TextArea('twext');
         $content->setLabel('Twat text');
         $content->setFilters(['striptags', 'string']);
         $content->addValidators([
@@ -26,10 +26,12 @@ class UserRegisterForm extends Form {
         ])
     ]);
             
-        
         $this->add($content);
-    
-
+     
+        $this->add(new Submit('Post', array(
+        'class' => 'btn btn-primary',
+        )));
+       
     
         }
         
