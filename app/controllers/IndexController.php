@@ -4,6 +4,10 @@ use Phalcon\Mvc\Controller;
 
 class IndexController extends Controller
 {
+  
+    public function initialize(){
+      
+    }
     
     public function indexAction()
     {
@@ -27,7 +31,7 @@ class IndexController extends Controller
         }
     }
     
-    public function addPost(){
+    public function addPostAction(){
 
       if ($this->request->isPost()) {
             if (!$form->isValid($this->request->getPost())) {
