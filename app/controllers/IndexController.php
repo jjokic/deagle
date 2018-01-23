@@ -25,8 +25,26 @@ class IndexController extends Controller
         */
           
         }
-        
-        
     }
     
+    public function addPost(){
+
+      if ($this->request->isPost()) {
+            if (!$form->isValid($this->request->getPost())) {
+                $messages = $form->getMessages();
+                foreach ($messages as $message) {
+                    $this->flash->error($message);
+                return $this->dispatcher->forward(
+                    [
+                        "controller" => "index",
+                        "action"     => "index",
+                    ]
+                );
+                }
+            }
+      
+      
+       }
+    
+    }
 }

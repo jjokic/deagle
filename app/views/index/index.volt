@@ -87,7 +87,8 @@ $auth = $this->session->get('auth');
             </p>
         
         <?php echo $form->render('Post'); ?>
-   </div>          
+    </div>       
+    </div>
 
 {% endif %}
 

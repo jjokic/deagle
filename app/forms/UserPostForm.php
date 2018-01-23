@@ -29,7 +29,7 @@ class UserPostForm extends Form {
         $this->add($content);
      
         $this->add(new Submit('Post', array(
-        'class' => 'btn btn-primary',
+        'class' => 'btn btn-primary btn-large btn-success',
         )));
        
     
