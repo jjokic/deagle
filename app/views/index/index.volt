@@ -74,6 +74,11 @@
         $twats = Post::find();
         echo "There are ", count($twats), "\n";
         
+        foreach ($twats as $twat) 
+                echo $twat->content . "\n";
+                
+                
+        
 ?>
 {% endif %}
 

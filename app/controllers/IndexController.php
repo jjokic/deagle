@@ -9,11 +9,19 @@ class IndexController extends Controller
       /*
       if ($this->session->has('auth')) {
             // Retrieve its value
-            $this->flash->success("IMA :D");
             $name = $this->session->get('user-name');
+            
+            // Fetch all twats from DB
+            $twats = Post::find();
+            
+            foreach ($twats as $twat) 
+                echo $twat->name, "\n";
+                
+
           
         }
         */
+        
     }
     
 }

@@ -5,15 +5,15 @@ use Phalcon\Validation\Validator\Email as EmailValidator;
 
 class Post extends Model {
     
-    protected $post_id;
+    protected $pid;
     protected $uid;
     protected $content;
-    protected $time;
+    protected $timestamp;
     
     // GETTERS
     
     public function get_pid() {
-        return $this->post_id;
+        return $this->pid;
     }
     
     public function get_uid() {
@@ -24,14 +24,14 @@ class Post extends Model {
         return $this->content;
     }
     
-    public function get_time(){
-        return $this->time;
+    public function get_timestamp(){
+        return $this->timestamp;
     }
     
     // SETTERS
     
     public function set_pid($pid) {
-        $this->post_id = $pid;
+        $this->pid = $pid;
     }
     
     public function set_uid($uid) {
@@ -42,8 +42,8 @@ class Post extends Model {
         $this->content = $content;
     }
     
-    public function set_time($time) {
-        $this->time = $time;
+    public function set_timestamp($time) {
+        $this->timestamp = $time;
     }
     
     // ...
