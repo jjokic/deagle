@@ -76,10 +76,12 @@
         
         foreach ($twats as $twat) 
                 echo $twat->content . "\n";
-                
-                
-        
+
 ?>
+
+
+
+
 {% endif %}
 
 </body>
