@@ -47,19 +47,10 @@ class IndexController extends Controller
                 }
             }
           
-          $this->flash->success("Thank you for your adding your twat to the collective twatter soup");
           $content = $this->request->getPost('twext', ['string', 'striptags']);
           $auth = $this->session->get('auth');
           
-          /*
-          return $this->dispatcher->forward(
-                    [
-                        "controller" => "index",
-                        "action"     => "index",
-                    ]
-                );
-*/
- //         $this->flash->success($content);
+ //       $this->flash->success($content);
           $post = new Post();
           $post->set_content($content);
           $post->set_timestamp(time());
@@ -71,7 +62,7 @@ class IndexController extends Controller
                 } else { 
              
                 $this->flash->success('Thanks for the twat, we appreciate your effort');
-//              return $this->response->redirect('....');
+                return $this->response->redirect('index');
             }
           
       }

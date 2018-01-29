@@ -71,7 +71,9 @@ $auth = $this->session->get('auth');
         $user = User::findFirst($auth['id']);
         $msg = "Welcome " . $auth['name'];
         $this->flash->success($msg);
-        
+?>
+        <p><a href='{{ url('session/end') }}'>Logout</a></p>
+<?php        
         // Get all TWATS
         $twats = Post::find(["limit" => 15]);
         echo "There are ", count($twats), "\n", '<br/>'; 
@@ -84,9 +86,11 @@ $auth = $this->session->get('auth');
             <div>
                 <p><?php echo $p_user->get_first() . '<br/>'; ?>
                 <?php echo $twat->get_content(); ?>
-                <?php $pid = $twat->get_pid() ?>
+                <?php $pid = $twat->get_pid();
+                if ($p_uid == $auth['id']): ?>
                 <a href="index/delete/<?php echo $pid?>"> Delete</a>
                 </p>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
         
