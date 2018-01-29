@@ -73,12 +73,23 @@ $auth = $this->session->get('auth');
         $this->flash->success($msg);
         
         // Get all TWATS
-        $twats = Post::find();
-        echo "There are ", count($twats), "\n", '<br/>';
+        $twats = Post::find(["limit" => 15]);
+        echo "There are ", count($twats), "\n", '<br/>'; 
+        ?>
         
-        foreach ($twats as $twat) 
-                echo $twat->get_content() . "\n";
-?>       
+        <?php foreach ($twats as $twat): 
+            $p_uid = $twat->get_uid();
+            $p_user = User::findFirst($p_uid);
+            ?>
+            <div>
+                <p><?php echo $p_user->get_first() . '<br/>'; ?>
+                <?php echo $twat->get_content(); ?>
+                <?php $pid = $twat->get_pid() ?>
+                <a href="index/delete/<?php echo $pid?>"> Delete</a>
+                </p>
+            </div>
+        <?php endforeach; ?>
+        
     <?= $this->tag->form(['index/addPost']) ?>
     <div class="main-wrapper">
             <h4> Twatter box </h4>
