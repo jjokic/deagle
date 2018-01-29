@@ -56,7 +56,7 @@
             <li>Stay informed about promotions and special packages</li>
         </ul>
         <div class="clearfix center">
-            <?= $this->tag->linkTo(['register', 'Sign Up', 'class' => 'btn btn-primary btn-large btn-success']) ?>
+            <?= $this->tag->linkTo(['signup', 'Sign Up', 'class' => 'btn btn-primary btn-large btn-success']) ?>
         </div>
     </div>
 </div>
@@ -74,10 +74,10 @@ $auth = $this->session->get('auth');
         
         // Get all TWATS
         $twats = Post::find();
-        echo "There are ", count($twats), "\n";
+        echo "There are ", count($twats), "\n", '<br/>';
         
         foreach ($twats as $twat) 
-                echo $twat->content . "\n";
+                echo $twat->get_content() . "\n";
 ?>       
     <?= $this->tag->form(['index/addPost']) ?>
     <div class="main-wrapper">

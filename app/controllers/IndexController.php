@@ -6,7 +6,7 @@ class IndexController extends Controller
 {
   
     public function initialize(){
-      
+    $this->forms->set('poster', new UserPostForm());   
     }
     
     public function indexAction()
@@ -32,7 +32,7 @@ class IndexController extends Controller
     }
     
     public function addPostAction(){
-
+      $form = $this->forms->get('poster');
       if ($this->request->isPost()) {
             if (!$form->isValid($this->request->getPost())) {
                 $messages = $form->getMessages();
@@ -46,9 +46,33 @@ class IndexController extends Controller
                 );
                 }
             }
-      
-      
-       }
+          
+          $this->flash->success("Thank you for your adding your twat to the collective twatter soup");
+          $content = $this->request->getPost('twext', ['string', 'striptags']);
+          /*
+          return $this->dispatcher->forward(
+                    [
+                        "controller" => "index",
+                        "action"     => "index",
+                    ]
+                );
+*/
+ //         $this->flash->success($content);
+          $post = new Post();
+          $post->set_content($content);
+          $post->set_timestamp(time());
+          $post->set_uid($this->session->get("uid"));
+           if ($post->save() == false) {
+                $this->flash->error('nije sejvan post');
+                foreach ($post->getMessages() as $message) 
+                    $this->flash->error((string) $message);
+                } else { 
+             
+                $this->flash->success('Thanks for the twat, we appreciate your effort');
+//              return $this->response->redirect('....');
+            }
+          
+      }
     
     }
 }
