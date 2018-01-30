@@ -72,12 +72,43 @@ class IndexController extends Controller
     
     public function deleteAction($pid)
     {
+        
+        if ($this->session->has('auth')) {
+            $auth = $this->session->get('auth');
+            if ($auth['id'] === 1000)
+                $rola = 'Admin';
+            else $rola = 'User'; }
+        else $rola = 'Guest';
+        
+       switch ($rola) {
+           
+           case 'Guest':
+               $this->flash->error("GTFO u pesky sk1d !!:one::one:11");
+             //return $this->response->redirect('index');
+               break;
+           
+           case 'User':
+                $twat = Post::findFirstByPid($pid);
+                if ($auth['id'] == $twat->get_uid())
+                    $this->flash->success("Congrats, u can edit the twat.");
+                break;
+                
+            case 'Admin':
+                $this->flash->success("I bow to thy Greatness Mastah");
+                break;
+           
+       }
+           
+        
+       $msg = "U haz rolemodel named: $rola";  
+       $this->flash->error($msg);   
+    
         $twat = Post::findFirstByPid($pid);
         if ($twat !== false) {
             if ($twat->delete() === false)
                 echo "We can't remove your twat atm, sorry !";
             else echo "Successfully eliminated the twat!";
-            return $this->response->redirect('index');
+//            return $this->response->redirect('index');
         }
         
     }

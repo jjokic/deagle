@@ -121,3 +121,10 @@ $di->setShared('session', function () {
 $di->setShared('forms', function () {
     return new FormsManager();
 });
+
+$di->set('acl', function () {
+    $acl = new Acl();
+    $pr = $this->getShared('AclResources')->privateResources->toArray();
+    $acl->addPrivateResources($pr);
+    return $acl;
+});

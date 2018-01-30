@@ -4,6 +4,7 @@ use Phalcon\Acl;
 use Phalcon\Acl\Role;
 use Phalcon\Acl\Resource;
 
+
 // Default action is deny access
 $acl->setDefaultAction(
     Acl::DENY

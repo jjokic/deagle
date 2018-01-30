@@ -11,6 +11,7 @@ class User extends Model
     protected $last_name;
     protected $email;
     protected $username;
+    protected $salt;
     protected $password;
     
     // GETTERS
@@ -34,6 +35,11 @@ class User extends Model
     public function get_username() {
         return $this->username;
     }
+    
+    public function get_salt() {
+        return $this->salt;
+    }
+    
     
      public function get_password() {
         return $this->password;
@@ -60,6 +66,10 @@ class User extends Model
     
     public function set_password($pwd) {
         $this->password = $pwd;
+    }
+    
+     public function set_salt($salt) {
+        $this->salt = $salt;
     }
     
     public function set_username($username) {
