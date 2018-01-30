@@ -46,7 +46,6 @@ class SessionController extends Controller
             if ($this->security->checkHash($password, $user->get_password())) {
                 // The password is valid
                 $this->_registerSession($user);
-                $this->flash->success('Welcome ' . $user->get_first());
                 return $this->dispatcher->forward(
                     [
                         "controller" => "index",
