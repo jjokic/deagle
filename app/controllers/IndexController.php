@@ -75,7 +75,8 @@ class IndexController extends Controller
         
         if ($this->session->has('auth')) {
             $auth = $this->session->get('auth');
-            if ($auth['id'] === 1000)
+            $this->flash->success($auth);
+            if ($auth["id"] == 1000)
                 $rola = 'Admin';
             else $rola = 'User'; }
         else $rola = 'Guest';
