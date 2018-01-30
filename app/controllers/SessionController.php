@@ -43,7 +43,7 @@ class SessionController extends Controller
             $user = User::findFirstByEmail($email);
             
             if ($user) {
-            if ($this->security->checkHash($password, $user->get_password())) {
+            if (password_verify($password, $user->get_password())) {
                 // The password is valid
                 $this->_registerSession($user);
                 return $this->dispatcher->forward(

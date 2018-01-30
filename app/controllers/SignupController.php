@@ -12,7 +12,7 @@ class SignupController extends Controller
         
     }
     
-    private function generateRandomString($length = 15) {
+    protected static function generateRandomString($length = 25) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -46,17 +46,21 @@ class SignupController extends Controller
             $email = $this->request->getPost('email', 'email');
             $password = $this->request->getPost('password');
             $repeatPassword = $this->request->getPost('repeatPassword');
+            $salt = SignupController::generateRandomString();
             if ($password != $repeatPassword) {
                 $this->flash->error('Passwords are different');
                 return false;
             }
             
+            $hashed = password_hash($password, PASSWORD_BCRYPT, ["salt" => $salt]);
+            
             $user = new User();
             $user->set_first($first_name);
             $user->set_last($last_name);
             $user->set_email($email);
-            $user->set_password($this->security->hash($password));
+            $user->set_password($hashed);
             $user->set_username($username);
+            $user->set_salt($salt);
             
             if ($user->save() == false) {
                 $this->flash->error('nije sejvan juzer');
@@ -65,7 +69,7 @@ class SignupController extends Controller
                 } else { 
              
                 $this->flash->success('Thanks for sign-up, please log-in to start twottering');
-                $this->flash->success(generateRandomString());
+                $this->flash->success("Salt je dodan :)");
 //              return $this->response->redirect('....');
             }
         }
