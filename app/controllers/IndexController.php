@@ -14,7 +14,7 @@ class IndexController extends Controller
     {
      
       if ($this->session->has('auth')) {
-          echo $this->security->getTokenKey();
+//          echo $this->security->getTokenKey();
           
     //      $post = new UserPostForm();
         

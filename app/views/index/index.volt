@@ -93,8 +93,19 @@ $auth = $this->session->get('auth');
     </tr>
     <?php } ?>
     </table>
-        
 
+<div>        
+    <a href='/'>First</a>
+    <a href='?page=<?= $podaci->before; ?>'>Previous</a>
+    <a href='?page=<?= $podaci->next; ?>'>Next</a>
+    <a href='?page=<?= $podaci->last; ?>'>Last</a>
+
+<p>
+<?php echo 'You are in page ', $podaci->current, ' of ', $podaci->total_pages; ?>
+</p>
+
+</div>
+        
         <?php 
         
         /*
