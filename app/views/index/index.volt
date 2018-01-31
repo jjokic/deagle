@@ -79,7 +79,26 @@ $auth = $this->session->get('auth');
         echo "There are ", count($twats), "\n", '<br/>'; 
         ?>
         
-        <?php foreach ($twats as $twat): 
+    <table>
+    <tr>
+        <th style="width:50px"> Pid </th>
+        <th style="width:50px"> Uid </th>
+        <th style="width:200px"> Content </th>
+    </tr>
+    <?php foreach ($podaci->items as $item) { ?>
+    <tr>
+        <td><?php echo $item->get_pid(); ?></td>
+        <td><?php echo $item->get_uid(); ?></td>
+        <td><?php echo $item->get_content(); ?></td>
+    </tr>
+    <?php } ?>
+    </table>
+        
+
+        <?php 
+        
+        /*
+        foreach ($twats as $twat): 
             $p_uid = $twat->get_uid();
             $p_user = User::findFirst($p_uid);
             ?>
@@ -92,7 +111,10 @@ $auth = $this->session->get('auth');
                 </p>
                 <?php endif; ?>
             </div>
-        <?php endforeach; ?>
+        <?php endforeach; 
+        */
+        
+        ?>
         
     {{ form("index/addPost") }}
     <div class="main-wrapper">

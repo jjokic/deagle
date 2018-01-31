@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Mvc\Controller;
+use Phalcon\Paginator\Adapter\Model as PaginatorModel;
 
 class IndexController extends Controller
 {
@@ -28,6 +29,24 @@ class IndexController extends Controller
                 echo $twat->name, "\n";
                 
         */
+        
+        $currentPage = (int) $_GET['page'];
+
+        // The data set to paginate
+        $twats = Post::find();
+        
+        // Create a Model paginator, show 10 rows by page starting from $currentPage
+        $paginator = new PaginatorModel(
+            [
+                'data'  => $twats,
+                'limit' => 3,
+                'page'  => $currentPage,
+            ]
+        );
+        
+        // Get the paginated results
+        $page = $paginator->getPaginate();
+        $this->view->setVar('podaci',$page);
           
         }
     }
@@ -99,6 +118,10 @@ class IndexController extends Controller
                 break;
            
        }
+           
+           
+           // Do some ACL magic here
+         //      ...
            
         
        $msg = "U haz rolemodel named: $rola";  
