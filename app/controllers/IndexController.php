@@ -31,6 +31,8 @@ class IndexController extends Controller
         */
         
         $currentPage = (int) $_GET['page'];
+        
+        // Query-builder objekt za paginaciju ?!
 
         // The data set to paginate
         $twats = Post::find();
@@ -100,6 +102,7 @@ class IndexController extends Controller
             else $rola = 'User'; }
         else $rola = 'Guest';
         
+        /*
        switch ($rola) {
            
            case 'Guest':
@@ -119,7 +122,10 @@ class IndexController extends Controller
            
        }
            
-           
+          */ 
+          if ($acl->isAllowed($rola, "index", "delete"))
+            $this->flash->error("Mores proc !");
+          
            // Do some ACL magic here
          //      ...
            

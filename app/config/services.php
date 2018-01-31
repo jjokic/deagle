@@ -123,8 +123,6 @@ $di->setShared('forms', function () {
 });
 
 $di->set('acl', function () {
-    $acl = new Acl();
-    $pr = $this->getShared('AclResources')->privateResources->toArray();
-    $acl->addPrivateResources($pr);
-    return $acl;
+    $config = $this->getConfig();
+    return require_once(__DIR__ . 'acl.php');
 });

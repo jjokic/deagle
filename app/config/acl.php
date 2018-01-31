@@ -55,7 +55,7 @@ $publicResources = array(
             }
         }
         
-//Grant access to calendar area to roles Users and Admin
+//Grant access to User area to roles Users and Admin
         foreach ($adminResources as $resource => $actions)
         {
             foreach ($actions as $action)
@@ -65,3 +65,14 @@ $publicResources = array(
             }
         }
         
+
+// Grant DELETE twat action to legit users
+
+$acl->allow(
+    'Users',
+    'index',
+    'delete',
+    function ($uid, $pUID) {
+        return $uid == $pUID;
+    }
+);
