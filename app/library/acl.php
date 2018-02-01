@@ -68,13 +68,13 @@ $publicResources = array(
         }
         
 
-// Grant DELETE twat action to legit users
+// Grant DELETE twat action permission to legit users
 
 $acl->allow(
     'Users',
     'index',
     'delete',
-    function ($uid, $pUID) {
-        return $uid == $pUID;
+    function ($pUID) {
+        
     }
 );

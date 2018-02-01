@@ -85,8 +85,9 @@ $this->acl->allow(
     'Users',
     'index',
     'delete',
-    function ($uid, $pUID) {
-        return $uid == $pUID;
+    function ($pUID) { // Loadat model s ID
+        $twat = Post::findFirstByPid($pUID);
+        
     }
 );
     
@@ -184,7 +185,7 @@ $this->acl->allow(
             $this->flash->success($auth);
             if ($auth["id"] == 1000)
                 $rola = 'Admin';
-            else $rola = 'User'; }
+            else $rola = 'Users'; }
         else $rola = 'Guest';
         
         /*
@@ -211,7 +212,17 @@ $this->acl->allow(
            
           */ 
           
-          if ($this->acl->isAllowed($rola, "index", "delete"))
+          $twat = Post::findFirstByPid($pid);
+          $this->flash->success($twat->get_pid());
+        
+        // Executing a simple query
+$query = $this->modelsManager->createQuery("SELECT * FROM Post WHERE pid = $pid");
+$twats  = $query->execute();
+          
+          $uid = $auth["id"];
+      //    $puid = 
+          
+          if ($this->acl->isAllowed($rola, "index", "delete",['pid' => 3]))
             $this->flash->error("Mores proc !");
           
            // Do some ACL magic here
