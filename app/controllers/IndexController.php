@@ -86,8 +86,14 @@ $this->acl->allow(
     'index',
     'delete',
     function ($pUID) { // Loadat model s ID
+    
+        if(!$this->session->has('auth'))
+            return False;
+    
         $twat = Post::findFirstByPid($pUID);
-        
+        $uid = $twat->get_uid();
+        $auth = $this->session->get("auth");
+            
     }
 );
     
