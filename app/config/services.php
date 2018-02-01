@@ -10,7 +10,6 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
 
 
-
 /**
  * Shared configuration service
  */
@@ -120,9 +119,4 @@ $di->setShared('session', function () {
 
 $di->setShared('forms', function () {
     return new FormsManager();
-});
-
-$di->set('acl', function () {
-    $config = $this->getConfig();
-    return require_once(__DIR__ . 'acl.php');
 });

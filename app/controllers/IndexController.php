@@ -2,16 +2,101 @@
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Paginator\Adapter\Model as PaginatorModel;
+use Phalcon\Acl;
+use Phalcon\Acl\Role;
+use Phalcon\Acl\Resource;
+use Phalcon\Acl\Adapter\Memory as AclList;
+
 
 class IndexController extends Controller
 {
   
+  private $acl;
+  
     public function initialize(){
     $this->forms->set('poster', new UserPostForm());   
+    
+    $this->acl = new AclList();
+
+     // Default action is deny access
+$this->acl->setDefaultAction(
+    Acl::DENY
+);
+
+// Create some roles.
+
+$roles = array(
+            'users' => new Phalcon\Acl\Role('Users'),
+            'admin' => new Phalcon\Acl\Role('Admin'),
+            'guests' => new Phalcon\Acl\Role('Guests')
+        );
+            foreach ($roles as $role)
+            {
+                $this->acl->addRole($role);
+            }
+
+// Admin area resources
+
+$adminResources = array(
+            'index' => array('index','addPost','delete'),
+            'session' => array('start', 'end'),
+            'signup' => array('submit')
+        );
+
+            foreach ($adminResources as $resource => $actions)
+            {
+                $this->acl->addResource(new Phalcon\Acl\Resource($resource), $actions);
+            } 
+
+// Public resources
+
+$publicResources = array(
+            'session' => array('start', 'end'),
+            'notfound' => array('route404')
+        );
+            foreach ($publicResources as $resource => $actions)
+            {
+                $this->acl->addResource(new Phalcon\Acl\Resource($resource), $actions);
+            }
+
+        //Grant access to public areas to all
+        foreach ($roles as $role)
+        {
+            foreach ($publicResources as $resource => $actions)
+            {
+                $this->acl->allow($role->getName(), $resource, '*');
+            }
+        }
+        
+//Grant access to User area to roles Users and Admin
+        foreach ($adminResources as $resource => $actions)
+        {
+            foreach ($actions as $action)
+            {
+                $this->acl->allow('Users', $resource, $action);
+                $this->acl->allow('Admin', $resource, $action);
+            }
+        }
+        
+
+// Grant DELETE twat action to legit users
+
+$this->acl->allow(
+    'Users',
+    'index',
+    'delete',
+    function ($uid, $pUID) {
+        return $uid == $pUID;
+    }
+);
+    
     }
     
     public function indexAction()
     {
+        
+
+     
      
       if ($this->session->has('auth')) {
 //          echo $this->security->getTokenKey();
@@ -121,9 +206,12 @@ class IndexController extends Controller
                 break;
            
        }
+       
+       
            
           */ 
-          if ($acl->isAllowed($rola, "index", "delete"))
+          
+          if ($this->acl->isAllowed($rola, "index", "delete"))
             $this->flash->error("Mores proc !");
           
            // Do some ACL magic here
@@ -140,6 +228,8 @@ class IndexController extends Controller
             else echo "Successfully eliminated the twat!";
 //            return $this->response->redirect('index');
         }
+        
+        
         
     }
 }

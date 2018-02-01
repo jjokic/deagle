@@ -3,7 +3,9 @@
 use Phalcon\Acl;
 use Phalcon\Acl\Role;
 use Phalcon\Acl\Resource;
+use Phalcon\Acl\Adapter\Memory as AclList;
 
+$acl = new AclList();
 
 // Default action is deny access
 $acl->setDefaultAction(
