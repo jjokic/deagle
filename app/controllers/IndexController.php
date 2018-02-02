@@ -19,9 +19,11 @@ class IndexController extends Controller
     $this->acl = new AclList();
 
      // Default action is deny access
-$this->acl->setDefaultAction(
-    Acl::DENY
-);
+     
+    $this->acl->setNoArgumentsDefaultAction(
+        Acl::DENY
+    );
+
 
 // Create some roles.
 
@@ -73,7 +75,7 @@ $publicResources = array(
         {
             foreach ($actions as $action)
             {
-                $this->acl->allow('Users', $resource, $action);
+//                $this->acl->allow('Users', $resource, $action);
                 $this->acl->allow('Admin', $resource, $action);
             }
         }
@@ -82,9 +84,9 @@ $publicResources = array(
 // Grant DELETE twat action to legit users
 
 $this->acl->allow(
-    'Users',
-    'index',
-    'delete',
+    "Users",
+    "index",
+    "delete",
     function ($pUID) { // Loadat model s ID
     
         if(!$this->session->has('auth'))
@@ -93,7 +95,9 @@ $this->acl->allow(
         $twat = Post::findFirstByPid($pUID);
         $uid = $twat->get_uid();
         $auth = $this->session->get("auth");
-            
+        if ($uid == $auth["id"])
+            return True;
+        else return False;
     }
 );
     
@@ -101,9 +105,6 @@ $this->acl->allow(
     
     public function indexAction()
     {
-        
-
-     
      
       if ($this->session->has('auth')) {
 //          echo $this->security->getTokenKey();
@@ -228,7 +229,9 @@ $twats  = $query->execute();
           $uid = $auth["id"];
       //    $puid = 
           
-          if ($this->acl->isAllowed($rola, "index", "delete",['pid' => 3]))
+    //      var_dump($this->acl);
+          
+          if ($this->acl->isAllowed($rola, "index", "delete",['pUID' => $pid]))
             $this->flash->error("Mores proc !");
           
            // Do some ACL magic here
