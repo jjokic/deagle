@@ -2,6 +2,7 @@
 
 use Phalcon\Mvc\Controller;
 use Phalcon\Paginator\Adapter\Model as PaginatorModel;
+use Phalcon\Paginator\Adapter\QueryBuilder as PaginatorQueryBuilder;
 use Phalcon\Acl;
 use Phalcon\Acl\Role;
 use Phalcon\Acl\Resource;
@@ -126,7 +127,22 @@ $this->acl->allow(
         $currentPage = (int) $_GET['page'];
         
         // Query-builder objekt za paginaciju ?!
+        // Passing a QueryBuilder as data
 
+        $builder = $this->modelsManager->createBuilder()
+            ->columns("pid, uid, content")
+            ->from("Post")
+            ->orderBy("pid DESC");
+        
+        $paginator = new PaginatorQueryBuilder(
+            [
+                "builder" => $builder,
+                "limit"   => 5,
+                "page"    => $currentPage,
+            ]
+        );
+
+/*
         // The data set to paginate
         $twats = Post::find();
         
@@ -138,8 +154,9 @@ $this->acl->allow(
                 'page'  => $currentPage,
             ]
         );
-        
+*/
         // Get the paginated results
+        
         $page = $paginator->getPaginate();
         $this->view->setVar('podaci',$page);
           
@@ -227,7 +244,6 @@ $query = $this->modelsManager->createQuery("SELECT * FROM Post WHERE pid = $pid"
 $twats  = $query->execute();
           
           $uid = $auth["id"];
-      //    $puid = 
           
     //      var_dump($this->acl);
           

@@ -87,9 +87,9 @@ $auth = $this->session->get('auth');
     </tr>
     <?php foreach ($podaci->items as $item) { ?>
     <tr>
-        <td><?php echo $item->get_pid(); ?></td>
-        <td><?php echo $item->get_uid(); ?></td>
-        <td><?php echo $item->get_content(); ?></td>
+        <td><?php echo $item->pid; ?></td>
+        <td><?php echo $item->uid; ?></td>
+        <td><?php echo $item->content; ?></td>
     </tr>
     <?php } ?>
     </table>
