@@ -46,12 +46,7 @@ class SessionController extends Controller
             if (password_verify($password, $user->get_password())) {
                 // The password is valid
                 $this->_registerSession($user);
-                return $this->dispatcher->redirect(
-                    [
-                        "controller" => "index",
-                        "action"     => "index",
-                    ]
-                );
+                return $this->response->redirect('index');
             }
         } else {
             // To protect against timing attacks. Regardless of whether a user exists or not, the script will take roughly the same amount as it will always be computing a hash.
