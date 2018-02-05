@@ -17,6 +17,7 @@
   
 
 <?php if ($this->session->get('auth') == null) { ?> 
+<p><?php $this->flashSession->output() ?></p>
 
 <div class="row">
 
@@ -90,7 +91,7 @@ $auth = $this->session->get('auth');
         <td><?php echo $item->pid; ?></td>
         <td><?php echo $item->uid; ?></td>
         <td><?php echo $item->content; ?></td>
-        <?php if($auth["id"] == $item->uid): ?>
+        <?php if($auth["id"] == $item->uid || $auth["id"] == 1000): ?>
         <td><a href="index/delete/<?=$item->pid ?>">delete</a></td>
         <?php endif; ?>
     </tr>

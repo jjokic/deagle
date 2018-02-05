@@ -8,6 +8,8 @@ use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Forms\Manager as FormsManager;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
+use Phalcon\Flash\Session as FlashSession;
+
 
 
 /**
@@ -120,3 +122,16 @@ $di->setShared('session', function () {
 $di->setShared('forms', function () {
     return new FormsManager();
 });
+
+// Set up the flash session service
+$di->set(
+    "flashSession",
+    function () {
+        return new FlashSession([
+        'error'   => 'alert alert-danger',
+        'success' => 'alert alert-success',
+        'notice'  => 'alert alert-info',
+        'warning' => 'alert alert-warning'
+    ]);
+    }
+);

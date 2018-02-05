@@ -17,6 +17,7 @@
   
 
 {% if session.get('auth') == null %} {# variable is not set #}
+<p><?php $this->flashSession->output() ?></p>
 
 <div class="row">
 

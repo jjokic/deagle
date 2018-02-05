@@ -52,12 +52,13 @@ class SessionController extends Controller
             // To protect against timing attacks. Regardless of whether a user exists or not, the script will take roughly the same amount as it will always be computing a hash.
             $this->security->hash(rand());
         }
-
+            $this->view->pick("index/index");
         // The validation has failed
             $this->flash->error('Wrong email/password');
+            $this->flashSession->error('Wrong email/password');
         }
 
-        return $this->response->redirect('index');
+         $this->response->redirect('index');
     }
 
     /**
