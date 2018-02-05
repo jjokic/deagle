@@ -90,6 +90,9 @@ $auth = $this->session->get('auth');
         <td><?php echo $item->pid; ?></td>
         <td><?php echo $item->uid; ?></td>
         <td><?php echo $item->content; ?></td>
+        <?php if($auth["id"] == $item->uid): ?>
+        <td><a href="index/delete/<?=$item->pid ?>">delete</a></td>
+        <?php endif; ?>
     </tr>
     <?php } ?>
     </table>

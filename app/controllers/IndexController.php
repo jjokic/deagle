@@ -262,7 +262,7 @@ $twats  = $query->execute();
             if ($twat->delete() === false)
                 echo "We can't remove your twat atm, sorry !";
             else echo "Successfully eliminated the twat!";
-//            return $this->response->redirect('index');
+            return $this->response->redirect('index');
         }
         
         

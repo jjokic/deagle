@@ -46,7 +46,7 @@ class SessionController extends Controller
             if (password_verify($password, $user->get_password())) {
                 // The password is valid
                 $this->_registerSession($user);
-                return $this->dispatcher->forward(
+                return $this->dispatcher->redirect(
                     [
                         "controller" => "index",
                         "action"     => "index",
@@ -62,12 +62,7 @@ class SessionController extends Controller
             $this->flash->error('Wrong email/password');
         }
 
-        return $this->dispatcher->forward(
-            [
-                "controller" => "session",
-                "action"     => "index",
-            ]
-        );
+        return $this->response->redirect('index');
     }
 
     /**
@@ -80,11 +75,7 @@ class SessionController extends Controller
         $this->session->remove('auth');
         $this->flash->success('Goodbye!');
 
-        return $this->dispatcher->forward(
-            [
-                "controller" => "index",
-                "action"     => "index",
-            ]
-        );
+        return $this->response->redirect('index');
+
     }
 }
